@@ -47,6 +47,19 @@ When this is called using python score_model.py in the command line, this will i
 3. Critical Thinking (2 points total)
 Modify this ReadMe file to answer the following questions directly in place.
 	1) Kaggle changes links/ file locations/login process/ file content
+	
+Solution:	The global variables that store KAggle links needs to be updated to show the latest change from Kaggle but the easiest way to maintian the sync with Kaggle is to use Kaggle API. Using Kaggle API one can download the required data without worrying about the physical locations of the data withing Kaggle environment. The login process can also be taken care by Kaggle API by maintaining Kaggle.json file under user profile in an *Nix/Windows OS environment. This will simplyfy the logon process. In my solution script pull_data.py, I have used both the methods of login to Kaggle i.e Loging by explicilty proving User ID and Password and Login using Kaggle API without user id and password.
+	
 	2) We run out of space on HD / local permissions issue - can't save files
+	
+Solution: We can use some cloud solution if we run out of space or if there is a permission issue. We can also sftp to download the files at a remote location. For lack of space we can also use generator objects.For very large data we can leverage back engine like Hadoop or Spark to handle the data. Also we will need ability to process data in chunks, data pull would need to be done in chunks, with further checks, processing in chunks and so on.
+
 	3) Someone updated python packages and there is unintended effect (functions retired or act differently)
+	
+Solution : It is always better to use an a python virtual environment. Even if the python packages are updated we can run all our scripts in a new python virtualenv by first running the requirements.txt
+
 	4) Docker issues - lost internet within docker due to some ip binding to vm or local routing issues( I guess this falls under lost internet, but I am talking more if docker is the cause rather then ISP)
+	
+Solution: It is advisable to run Docker through a bash script. We can write a bash script to run Docker. We can mention parameters like mount drive and ports exposed to access docker in the bash script.
+
+docker run -v $(pwd):<Mount Drive>  --name=<Docker Container>  -p <Host Port>:<Docker Port> -i -t --runtime=<Docker Image>
